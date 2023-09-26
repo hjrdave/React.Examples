@@ -60,3 +60,17 @@ export default class ReactWidget<P> {
     this.render();
   }
 }
+
+///instanciated demo
+/**
+ * This index is used as an entry point into library bundle
+ * based on https://ohsnail.com/building-a-react-app-as-a-widget-using-webpack/
+ */
+
+type Props = {} | IReactWidget.Props;
+export const init = (init: IReactWidget.Init<Props>) =>
+  new ReactWidget<Props>({
+    selector: init.selector,
+    props: init.props,
+    component: () => <></>, //[Some React Component]
+  });
