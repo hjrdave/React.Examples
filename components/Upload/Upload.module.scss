@@ -1,0 +1,36 @@
+.compContainer {
+  border: 3px dashed grey;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+.hover {
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.icon {
+  font-size: 4.5rem;
+}
+.text {
+  font-size: 0.75rem;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.noCursor {
+  cursor: default !important;
+}
+
+.remove {
+  transition: opacity 0.2s;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.clearBtn {
+  font-size: 0.8rem;
+}

@@ -20,5 +20,8 @@
     "@types/react-dom": "^18.0.9",
     "typescript": "^4.9.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-bootstrap": "^2.9.0",
+    "react-dropzone": "^14.2.3"
+  }
 }
