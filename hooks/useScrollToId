@@ -1,0 +1,95 @@
+import { useState, useEffect } from "react";
+
+type UseScrollToIdProps = {
+  containerSelector: string;
+  tag: string;
+  offsetTop?: string;
+};
+
+const useScrollToId = ({
+  containerSelector,
+  tag,
+  offsetTop = "0px",
+}: UseScrollToIdProps) => {
+  const [currentId, setCurrentId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: `-${offsetTop} 0px 0px 0px`,
+      threshold: 0.5,
+    };
+
+    const callback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setCurrentId(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    const container = document.querySelector(containerSelector);
+
+    if (container) {
+      const targetElements = container.querySelectorAll(tag);
+
+      if (targetElements) {
+        targetElements.forEach((element) => {
+          observer.observe(element);
+        });
+      }
+    }
+
+    return () => {
+      const targetElements = container?.querySelectorAll(tag);
+
+      if (targetElements) {
+        targetElements.forEach((element) => {
+          observer.unobserve(element);
+        });
+      }
+      observer.disconnect();
+    };
+  }, [containerSelector, tag, offsetTop]);
+
+  return { currentId };
+};
+
+export default useScrollToId;
+
+//example
+/*
+import React from 'react';
+import useScrollToId from './useScrollToId';
+
+const ScrollComponent = () => {
+  const { currentId } = useScrollToId({ containerSelector: '.container', tag: 'h2' });
+
+  return (
+    <div className="container">
+ 
+      <div>
+        <h2 id="section1">Section 1</h2>
+    
+      </div>
+      <div>
+        <h2 id="section2">Section 2</h2>
+ 
+      </div>
+      <div>
+        <h2 id="section3">Section 3</h2>
+     
+      </div>
+
+      <div>
+        <p>Currently Scrolled ID: {currentId}</p>
+      </div>
+    </div>
+  );
+};
+
+export default ScrollComponent;
+
+*/
