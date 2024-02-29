@@ -1,4 +1,4 @@
-```markdown
+
 # useCookie Hook Documentation
 
 This hook provides functionality to manage cookies in a React component.
@@ -48,4 +48,3 @@ The `useCookie` hook returns an object with the following properties:
 - `get`: A function to retrieve the value of the cookie.
 - `set`: A function to set a new value for the cookie.
 
-```
